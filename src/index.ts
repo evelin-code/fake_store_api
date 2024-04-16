@@ -1,4 +1,4 @@
-import './components/Product/Product'
+import './screens/dashboard';
 
 class initContainer extends HTMLElement {
 
@@ -14,7 +14,7 @@ class initContainer extends HTMLElement {
   render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
-        <product-container></product-container>
+        <dashboard-container></dashboard-container>
       `;
     }
   }

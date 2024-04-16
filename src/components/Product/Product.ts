@@ -1,26 +1,54 @@
 import styles from './Product.css';
 
+export enum Attribute {
+	'image' = 'image',
+	'name' = 'name',
+	'description' = 'description',
+	'category' = 'category',
+	'rating' = 'rating',
+	'price' = 'price',
+}
+
 class Product extends HTMLElement {
 
- constructor() {
+  image?: string;
+  name?: string;
+  description?: string;
+  category?: string;
+  rating?: string;
+  price?: string;
+
+  static get observedAttributes() {
+		const classAttribute: Record<Attribute, null> = {
+			image: null,
+			name: null,
+			description: null,
+			category: null,
+			rating: null,
+			price: null,
+		};
+		return Object.keys(classAttribute);
+	}
+
+  constructor() {
     super();
     this.attachShadow({ mode: 'open' });
- }
+  }
  
- connectedCallback() {
+  connectedCallback() {
     this.render();
- }
+  }
 
   render() {
     if (this.shadowRoot) {
       this.shadowRoot.innerHTML = `
         <div class="container-product">
-          <img class="img-product" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBlPuD-kHu75Tl04N5i_UC3VIOZWeWZvqEHgtnf8Dbqw&s">
-          <h1>titulo</h1>
-          <p>descripcion</p>
-          <small>categoria</small> - <small>Rating</small>
-          <p>precio</p>
-          <button onclick="alert('¡Bienvenido a GeeksforGeeks!')">Haz clic aquí</button>
+          <img class="img-product" src="${this.image}">
+          <h1>${this.name}</h1>
+          <p>${this.description}</p>
+          <small>${this.category}</small> - <small>${this.rating}</small>
+          <p>${this.price}</p>
+          <button onclick="alert('¡Añadido!')">Añadir al carrito</button>
         </div>
       `;
 
